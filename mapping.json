@@ -1,0 +1,8 @@
+{
+    "properties": {
+        "location": {
+            "type": "geo_point"
+        },
+        "name": {"type": "string", "analyzer": "standard"}
+    }
+}
