@@ -20,7 +20,7 @@ Basic example loads data from GeoNames:
 4. Run `incertitude.py`
 
 	```bash
-	python incertitude.py <mapping_file.json> <geonames_file_path>
+	python incertitude.py <mapping_file.json> <geonames_file_path> <settings_file.json>
 	```
 5. Give a whirl [in your browser](http://localhost:9200/geocode/place/_search?q=Greater Seattle Area)
 	

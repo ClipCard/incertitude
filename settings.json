@@ -1,0 +1,18 @@
+{
+    "analysis" : {
+        "filter" : {
+          "non_alpha" : {
+            "type" : "word_delimiter",
+            "split_on_numerics" : "false",
+            "preserve_original" : "true"
+        }
+        },
+        "analyzer" : {
+            "name_analyzer" : {
+                "type" : "custom",
+                "filter" : ["lowercase", "non_alpha", "standard", "stop"],
+                "tokenizer" : "standard"
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@
 geocoder for possibly ambiguous input queries.
 
 Usage:
-  incertitude.py <mapping_file.json> <geonames_file_path>
+  incertitude.py <mapping_file.json> <geonames_file_path> <settings_file.json>
   incertitude.py (-h | --help)
   incertitude.py --version
 
@@ -22,16 +22,25 @@ if __name__ == '__main__':
     arguments = docopt(__doc__, version='incertitude geonames 1.0')
     db_path = arguments["<geonames_file_path>"]
     mapping_file = arguments["<mapping_file.json>"]
+    settings_file = arguments["<settings_file.json>"]
 
     with file(mapping_file) as f:
         mapping = json.load(f)
 
+    with file(settings_file) as f:
+        settings = json.load(f)
+
     # by default we connect to localhost:9200
     es = Elasticsearch()
 
+    body = {
+        "settings": settings,
+        "mappings": mapping
+    }
+
     # create an index in elasticsearch, ignore status code 400 (index already exists)
-    es.indices.create(index='geocode', ignore=400)
-    es.indices.put_mapping(index='geocode', doc_type='place', body=mapping)
+    es.indices.delete(index='geocode', ignore=404)
+    es.indices.create(index='geocode', ignore=400, body=body)
     with file(db_path) as db:
         reader = csv.reader(db, 'excel-tab')
         for row in reader:

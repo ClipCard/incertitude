@@ -1,8 +1,14 @@
 {
-    "properties": {
-        "location": {
-            "type": "geo_point"
-        },
-        "name": {"type": "string", "analyzer": "standard"}
+    "place": {
+        "properties": {
+            "location": {
+                "type": "geo_point"
+            },
+            "name": {
+                "type": "string", 
+                "analyzer": "name_analyzer",
+                "search_analyzer": "name_analyzer"
+            }
+        }
     }
 }
