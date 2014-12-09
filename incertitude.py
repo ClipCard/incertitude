@@ -49,10 +49,11 @@ if __name__ == '__main__':
             country = row[8]
             lat = row[4]
             lng = row[5]
+            state = row[10]
             population = row[14]
 
             data = {
-                "name": name,
+                "name": name + " " + state,
                 "country": country,
                 "population": population,
                 "location": {
